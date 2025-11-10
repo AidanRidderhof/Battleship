@@ -19,3 +19,21 @@ export class Ship {
         }
     }
 }
+
+export class GameBoard {
+    constructor() {
+        this.board = Array.from({ length: 10 }, () => 
+            Array(10).fill(null)
+        );
+    }
+
+    placeShip(length, x, y) {
+        const ship = new Ship(length)
+        for (let i=0; i<ship.length; i++) {
+            this.board[x][y] = 1
+            x+=1
+        }
+    }
+
+
+}
