@@ -25,14 +25,23 @@ export class GameBoard {
         this.board = Array.from({ length: 10 }, () => 
             Array(10).fill(null)
         );
+        this.ships=[]
     }
 
     placeShip(length, x, y) {
         const ship = new Ship(length)
         for (let i=0; i<ship.length; i++) {
-            this.board[x][y] = 1
+            this.board[x][y] = ship
             x+=1
         }
+        this.ships.push(ship)
+    }
+
+    recieveAttack(x, y) {
+        if (this.board[x][y]) {
+            this.board[x][y].isHit()
+        }
+        this.board[x][y] = 1
     }
 
 

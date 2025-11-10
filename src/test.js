@@ -35,10 +35,19 @@ describe("GameBoard class functionality", () => {
     test("place ship on board", () => {
         expect(board.board[4][5]).toBe(null)
         board.placeShip(4, 3, 4)
-        expect(board.board[3][4]).toBe(1)
-        expect(board.board[4][4]).toBe(1)
-        expect(board.board[5][4]).toBe(1)
-        expect(board.board[6][4]).toBe(1)
+        expect(board.board[3][4]).toBe(board.ships[0])
+        expect(board.board[4][4]).toBe(board.ships[0])
+        expect(board.board[5][4]).toBe(board.ships[0])
+        expect(board.board[6][4]).toBe(board.ships[0])
+    })
+
+    test("ship gets attacked", () => {
+        board.placeShip(4, 3, 4)
+        board.recieveAttack(3, 4)
+        expect(board.board[4][4].hits).toBe(1)
+        board.recieveAttack(6, 4)
+        expect(board.board[4][4].hits).toBe(2)
+
     })
 })
 
