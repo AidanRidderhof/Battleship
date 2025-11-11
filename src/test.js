@@ -65,10 +65,19 @@ describe("GameBoard class functionality", () => {
         expect(board.checkAllSunk()).toBe(true)
     })
 
-    /* test("cant place ship out of bounds", () => {
-        board.placeShip(8, 1, 4, 0)
+    test("cant place ship out of bounds", () => {
+        board.placeShip(7, 1, 4, 0)
+        expect(board.board[7][1]).toBe(null)
         expect(board.board[8][1]).toBe(null)
-        expect(board.board[9][1]).toBe(null)
-    }) */
+        board.placeShip(5, 8, 3, 1)
+        expect(board.board[5][8]).toBe(null)
+        expect(board.board[5][9]).toBe(null)
+    }) 
+
+    test("ships cant overlap", () => {
+        board.placeShip(3, 5, 4, 0)
+        board.placeShip(5, 4, 3, 1)
+        expect(board.board[5][5]).toBe(board.ships[0])
+    })
 })
 

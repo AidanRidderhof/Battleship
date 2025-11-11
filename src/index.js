@@ -32,20 +32,22 @@ export class GameBoard {
 
     placeShip(x, y, length, orientation) {
         const ship = new Ship(length)
-        if (orientation===0) { //horizontal
-            for (let i=0; i<ship.length; i++) {
-                this.board[x][y] = ship
-                x++
+        if (this.shipIsLegal(x, y, length, orientation)) {
+            if (orientation===0) { //horizontal
+                for (let i=0; i<ship.length; i++) {
+                    this.board[x][y] = ship
+                    x++
+                }
             }
-        }
-        else { //vertical
-            for (let i=0; i<ship.length; i++) {
-                this.board[x][y] = ship
-                y++
+            else { //vertical
+                for (let i=0; i<ship.length; i++) {
+                    this.board[x][y] = ship
+                    y++
+                }
             }
+            
+            this.ships.push(ship)
         }
-        
-        this.ships.push(ship)
     }
 
     recieveAttack(x, y) {
@@ -62,7 +64,20 @@ export class GameBoard {
     }
 
     //see legality of ship placement
-    #shipIsLegal(x, y, length, orientation) {
+    shipIsLegal(x, y, length, orientation) {
+        let z = null
+        //is ship out of bounds
+        if (x < 0 || y< 0 || x >9 || y> 9) return false
+        orientation ? z = y+length : z = x+length
+        if (z < 0 || z > 10) return false
+        //does ship have overlap
+        for (let i=0; i<length; i++) {
+            if (this.board[x][y] == null) {
+                orientation ? y++ : x++
+            }
+            else return false
+        }
+        return true
     }
 
     checkAllSunk() {
