@@ -32,7 +32,7 @@ export class GameBoard {
 
     placeShip(x, y, length, orientation) {
         const ship = new Ship(length)
-        if (orientation===0) { //horizontao
+        if (orientation===0) { //horizontal
             for (let i=0; i<ship.length; i++) {
                 this.board[x][y] = ship
                 x++
@@ -55,7 +55,19 @@ export class GameBoard {
                 this.sunkShips++
             }
         }
+        else {
+            this.misses.push([x, y])
+        }
         this.board[x][y] = 1
+    }
+
+    //see legality of ship placement
+    #shipIsLegal(x, y, length, orientation) {
+    }
+
+    checkAllSunk() {
+        if (this.sunkShips >= this.ships.length) return true
+        return false
     }
 
 

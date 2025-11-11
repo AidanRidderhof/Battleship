@@ -1,3 +1,4 @@
+import { experiments } from "webpack";
 import { Ship, GameBoard } from ".";
 
 describe("ship class functionality", ()=> {
@@ -55,11 +56,19 @@ describe("GameBoard class functionality", () => {
 
     test("vertical ships", () => {
         board.placeShip(2, 5, 3, 1)
+        expect(board.checkAllSunk()).toBe(false)
         expect(board.board[2][6]).toBe(board.ships[0])
         board.recieveAttack(2, 5)
         board.recieveAttack(2,6)
         board.recieveAttack(2, 7)
         expect(board.ships[0].sunk).toBe(true)
+        expect(board.checkAllSunk()).toBe(true)
     })
+
+    /* test("cant place ship out of bounds", () => {
+        board.placeShip(8, 1, 4, 0)
+        expect(board.board[8][1]).toBe(null)
+        expect(board.board[9][1]).toBe(null)
+    }) */
 })
 
