@@ -26,20 +26,34 @@ export class GameBoard {
             Array(10).fill(null)
         );
         this.ships=[]
+        this.misses = []
+        this.sunkShips = 0
     }
 
-    placeShip(length, x, y) {
+    placeShip(x, y, length, orientation) {
         const ship = new Ship(length)
-        for (let i=0; i<ship.length; i++) {
-            this.board[x][y] = ship
-            x+=1
+        if (orientation===0) { //horizontao
+            for (let i=0; i<ship.length; i++) {
+                this.board[x][y] = ship
+                x++
+            }
         }
+        else { //vertical
+            for (let i=0; i<ship.length; i++) {
+                this.board[x][y] = ship
+                y++
+            }
+        }
+        
         this.ships.push(ship)
     }
 
     recieveAttack(x, y) {
         if (this.board[x][y]) {
             this.board[x][y].isHit()
+            if (this.board[x][y].sunk) {
+                this.sunkShips++
+            }
         }
         this.board[x][y] = 1
     }

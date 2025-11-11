@@ -34,7 +34,7 @@ describe("GameBoard class functionality", () => {
 
     test("place ship on board", () => {
         expect(board.board[4][5]).toBe(null)
-        board.placeShip(4, 3, 4)
+        board.placeShip(3, 4, 4, 0)
         expect(board.board[3][4]).toBe(board.ships[0])
         expect(board.board[4][4]).toBe(board.ships[0])
         expect(board.board[5][4]).toBe(board.ships[0])
@@ -42,12 +42,24 @@ describe("GameBoard class functionality", () => {
     })
 
     test("ship gets attacked", () => {
-        board.placeShip(4, 3, 4)
+        board.placeShip(3, 4, 4, 0)
         board.recieveAttack(3, 4)
-        expect(board.board[4][4].hits).toBe(1)
+        expect(board.ships[0].hits).toBe(1)
+        board.recieveAttack(4, 4)
+        board.recieveAttack(5,4)
         board.recieveAttack(6, 4)
-        expect(board.board[4][4].hits).toBe(2)
+        expect(board.ships[0].sunk).toBe(true)
+        expect(board.sunkShips).toBe(1)
 
+    })
+
+    test("vertical ships", () => {
+        board.placeShip(2, 5, 3, 1)
+        expect(board.board[2][6]).toBe(board.ships[0])
+        board.recieveAttack(2, 5)
+        board.recieveAttack(2,6)
+        board.recieveAttack(2, 7)
+        expect(board.ships[0].sunk).toBe(true)
     })
 })
 
