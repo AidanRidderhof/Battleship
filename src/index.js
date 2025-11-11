@@ -85,5 +85,11 @@ export class GameBoard {
         return false
     }
 
+}
 
+class Player {
+    constructor(name) {
+        this.name = name
+        this.gameBoard = new GameBoard
+    }
 }

@@ -79,5 +79,18 @@ describe("GameBoard class functionality", () => {
         board.placeShip(5, 4, 3, 1)
         expect(board.board[5][5]).toBe(board.ships[0])
     })
+
+    test("board checks all ships sunk", () => {
+        board.placeShip(1, 1, 2, 0)
+        board.placeShip(4, 3, 3, 1)
+        board.recieveAttack(1, 1)
+        board.recieveAttack(2, 1)
+        board.recieveAttack(4, 3)
+        board.recieveAttack(4, 4)
+        board.recieveAttack(4, 5)
+        
+        expect(board.checkAllSunk()).toBe(true)
+
+    })
 })
 
