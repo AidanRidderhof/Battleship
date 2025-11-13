@@ -54,11 +54,14 @@ export class GameBoard {
             if (this.board[x][y].sunk) {
                 this.sunkShips++
             }
+            this.board[x][y] = 1
+            
         }
         else {
             this.misses.push([x, y])
+            this.board[x][y] = 2
         }
-        this.board[x][y] = 1
+        //this.board[x][y] = 1
     }
 
     //see legality of ship placement

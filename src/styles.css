@@ -20,7 +20,22 @@
 .grid-square {
     width: 58px;
     height: 58px;
+}
+
+.empty-square {
     background-color: skyblue;
+}
+
+.player-ship {
+    background-color: green;
+}
+
+.hit-square {
+    background-color: red;
+}
+
+.missed-square {
+    background-color: gray;
 }
 
 #computerboard .grid-square:hover {
