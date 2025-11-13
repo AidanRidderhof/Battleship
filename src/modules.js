@@ -71,4 +71,3 @@ function drawComBoard(com, board) {
         })
     });
 }
-
