@@ -38,6 +38,6 @@
     background-color: gray;
 }
 
-#computerboard .grid-square:hover {
+#computerboard .empty-square:hover {
     background-color: aqua;
 }

@@ -48,7 +48,9 @@ export class GameBoard {
         }
     }
 
-    recieveAttack(x, y) {
+    receiveAttack(x, y) {
+            console.log(x + " " + y)
+
         if (this.board[x][y]) {
             this.board[x][y].isHit()
             if (this.board[x][y].sunk) {

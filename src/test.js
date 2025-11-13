@@ -43,17 +43,17 @@ describe("GameBoard class functionality", () => {
     })
 
     test("attack misses", () => {
-        board.recieveAttack(3,5)
+        board.receiveAttack(3,5)
         expect(board.board[3][5]).toBe(2)
     })
 
     test("ship gets attacked", () => {
         board.placeShip(3, 4, 4, 0)
-        board.recieveAttack(3, 4)
+        board.receiveAttack(3, 4)
         expect(board.ships[0].hits).toBe(1)
-        board.recieveAttack(4, 4)
-        board.recieveAttack(5,4)
-        board.recieveAttack(6, 4)
+        board.receiveAttack(4, 4)
+        board.receiveAttack(5,4)
+        board.receiveAttack(6, 4)
         expect(board.ships[0].sunk).toBe(true)
         console.log(board.ships[0])
         expect(board.sunkShips).toBe(1)
@@ -65,9 +65,9 @@ describe("GameBoard class functionality", () => {
         board.placeShip(2, 5, 3, 1)
         expect(board.checkAllSunk()).toBe(false)
         expect(board.board[2][6]).toBe(board.ships[0])
-        board.recieveAttack(2, 5)
-        board.recieveAttack(2,6)
-        board.recieveAttack(2, 7)
+        board.receiveAttack(2, 5)
+        board.receiveAttack(2,6)
+        board.receiveAttack(2, 7)
         expect(board.ships[0].sunk).toBe(true)
         expect(board.checkAllSunk()).toBe(true)
     })
@@ -90,11 +90,11 @@ describe("GameBoard class functionality", () => {
     test("board checks all ships sunk", () => {
         board.placeShip(1, 1, 2, 0)
         board.placeShip(4, 3, 3, 1)
-        board.recieveAttack(1, 1)
-        board.recieveAttack(2, 1)
-        board.recieveAttack(4, 3)
-        board.recieveAttack(4, 4)
-        board.recieveAttack(4, 5)
+        board.receiveAttack(1, 1)
+        board.receiveAttack(2, 1)
+        board.receiveAttack(4, 3)
+        board.receiveAttack(4, 4)
+        board.receiveAttack(4, 5)
         
         expect(board.checkAllSunk()).toBe(true)
 

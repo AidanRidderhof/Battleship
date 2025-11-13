@@ -8,8 +8,12 @@ export function populateBoard() {
     player1.gameBoard.placeShip(7, 4, 3, 1)
     player1.gameBoard.placeShip(0, 0, 1, 1)
 
-    player1.gameBoard.recieveAttack(3, 4)
-    player1.gameBoard.recieveAttack(3, 2)
+    player1.gameBoard.receiveAttack(3, 4)
+    player1.gameBoard.receiveAttack(3, 2)
+
+    com.gameBoard.placeShip(2, 2, 4, 0)
+    com.gameBoard.placeShip(7, 4, 3, 1)
+    com.gameBoard.placeShip(0, 0, 1, 1)
 
 
 
@@ -43,11 +47,28 @@ function drawPlayerBoard(player, board) {
 }
 
 function drawComBoard(com, board) {
-    com.gameBoard.board.forEach(row => {
-        row.forEach(cell => {
+    com.gameBoard.board.forEach((row, x) => {
+        row.forEach((cell, y) => {
             const gridSquare = document.createElement("div")
-            gridSquare.classList.add("grid-square", "empty-square")
+            gridSquare.classList.add("grid-square")
+
             board.appendChild(gridSquare)
+
+            if (cell == 1) {
+                gridSquare.classList.add("hit-square")
+            }
+            else if (cell == 2) {
+                gridSquare.classList.add("missed-square")
+            }
+            else {
+                gridSquare.classList.add("empty-square")
+                gridSquare.addEventListener("click", () => {
+                    com.gameBoard.receiveAttack(x, y)
+                    board.innerHTML = ''
+                    drawComBoard(com, board)
+                })
+            }
         })
     });
 }
+
