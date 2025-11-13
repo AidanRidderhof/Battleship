@@ -1,5 +1,3 @@
-import "./styles.css";
-
 export class Ship {
     constructor(length) {
         this.length = length
@@ -87,9 +85,8 @@ export class GameBoard {
 
 }
 
-class Player {
-    constructor(name) {
-        this.name = name
+export class Player {
+    constructor() {
         this.gameBoard = new GameBoard
     }
 }

@@ -1,0 +1,28 @@
+#gameboard {
+    display: flex;
+    justify-content: space-evenly;
+    width: 75vw;
+    justify-self: center;
+    margin: auto;
+}
+
+#gameboard > div {
+    border: solid 2px black;
+    width: 600px;
+    height: 600px;
+    background-color: black;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+
+}
+
+.grid-square {
+    width: 58px;
+    height: 58px;
+    background-color: skyblue;
+}
+
+#computerboard .grid-square:hover {
+    background-color: aqua;
+}
