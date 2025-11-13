@@ -22,5 +22,6 @@ export function populateBoard() {
             computerBoard.appendChild(gridSquare)
         })
     });
-
 }
+
+//maybe convert to drawPlayerBoard and drawComBoard
