@@ -8,8 +8,8 @@
 
 #gameboard > div {
     border: solid 2px black;
-    width: 600px;
-    height: 600px;
+    min-width: 600px;
+    min-height: 600px;
     background-color: black;
     display: flex;
     flex-wrap: wrap;
