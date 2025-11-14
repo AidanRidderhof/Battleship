@@ -15,9 +15,6 @@ export function populateBoard() {
     com.gameBoard.placeShip(7, 4, 3, 1)
     com.gameBoard.placeShip(0, 0, 1, 1)
 
-
-
-
     const playerBoard = document.querySelector("#playerboard")
     const computerBoard = document.querySelector("#computerboard")
 
@@ -27,13 +24,12 @@ export function populateBoard() {
     
 }
 
-function drawPlayerBoard(player, board) {
-    player.gameBoard.board.forEach(column => {
-        column.forEach(cell => {
+function drawBoard(player, board, { revealShips }) {
+    player.gameBoard.board.forEach((column, x) => {
+        column.forEach((cell, y) => {
             const gridSquare = document.createElement("div")
-            gridSquare.classList.add("grid-square", "empty-square")
-            board.appendChild(gridSquare)
-            if (cell instanceof Ship) {
+            gridSquare.classList.add("grid-square")
+            if (cell instanceof Ship && revealShips) {
                 gridSquare.classList.add("player-ship")
             }
             else if (cell == 1) {
@@ -70,12 +66,11 @@ function drawComBoard(com, comBoard, player, playerBoard) {
                     computerTurn(player, playerBoard)
                 })
             }
+            board.appendChild(gridSquare)
         })
     });
 }
  
-
-
 
 function computerTurn(player, playerBoard) {
     let x = getRandomInt(10)

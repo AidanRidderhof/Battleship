@@ -55,6 +55,10 @@ export class GameBoard {
         }
 
 
+        if (this.board[x][y]==1) {
+            return false
+        }
+        
         if (this.board[x][y]) {
             this.board[x][y].isHit()
             if (this.board[x][y].sunk) {
