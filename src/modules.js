@@ -24,12 +24,12 @@ export function populateBoard() {
     
 }
 
-function drawBoard(player, board, { revealShips }) {
+function drawPlayerBoard(player, board) {
     player.gameBoard.board.forEach((column, x) => {
         column.forEach((cell, y) => {
             const gridSquare = document.createElement("div")
             gridSquare.classList.add("grid-square")
-            if (cell instanceof Ship && revealShips) {
+            if (cell instanceof Ship) {
                 gridSquare.classList.add("player-ship")
             }
             else if (cell == 1) {
@@ -38,6 +38,10 @@ function drawBoard(player, board, { revealShips }) {
             else if (cell == 2) {
                 gridSquare.classList.add("missed-square")
             }
+            else {
+                gridSquare.classList.add("empty-square")
+            }
+            board.appendChild(gridSquare)
         })
     });
 }
@@ -66,7 +70,7 @@ function drawComBoard(com, comBoard, player, playerBoard) {
                     computerTurn(player, playerBoard)
                 })
             }
-            board.appendChild(gridSquare)
+            comBoard.appendChild(gridSquare)
         })
     });
 }
