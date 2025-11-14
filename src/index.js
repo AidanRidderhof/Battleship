@@ -80,14 +80,33 @@ export class GameBoard {
         //is ship out of bounds
         if (x < 0 || y< 0 || x >9 || y> 9) return false
         orientation ? z = y+length : z = x+length
-        if (z < 0 || z > 10) return false
+        if (z < 0 || z > 9) return false
         //does ship have overlap
         for (let i=0; i<length; i++) {
-            if (this.board[x][y] == null) {
-                orientation ? y++ : x++
+            // check center, up, right, down left
+            if (this.board[x][y] !== null) {
+                return false
                 //check neighbors [x][y+1], [x+1][y], [x][y-1], [x-1][y]
             }
-            else return false
+
+            for (let dx=-1; dx<=1; dx++) {
+                for (let dy =-1; dy<=1; dy++) {
+                    if (dx === 0 && dy === 0) continue;
+
+                    let neighborX = x + dx;
+                    let neighborY = y + dy;
+
+                    if (neighborX >= 0 && neighborX <= 9 && neighborY >= 0 && neighborY <= 9) {
+                    if (this.board[neighborX][neighborY] !== null) {
+                        // Found a ship in an adjacent cell
+                        return false;
+                    }
+                }
+
+                }
+            }
+
+            orientation ? y++ : x++
         }
         return true
     }

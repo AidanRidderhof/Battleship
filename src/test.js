@@ -84,6 +84,9 @@ describe("GameBoard class functionality", () => {
     test("ships cant overlap", () => {
         board.placeShip(3, 5, 4, 0)
         board.placeShip(5, 4, 3, 1)
+        console.log(board.ships)
+        console.log(board.board[5][5])
+
         expect(board.board[5][5]).toBe(board.ships[0])
     })
 
