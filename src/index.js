@@ -49,7 +49,11 @@ export class GameBoard {
     }
 
     receiveAttack(x, y) {
-            console.log(x + " " + y)
+        //console.log(x + " " + y)
+        if (this.board[x][y] == 1) {
+            return false
+        }
+
 
         if (this.board[x][y]) {
             this.board[x][y].isHit()

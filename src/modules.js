@@ -22,7 +22,7 @@ export function populateBoard() {
     const computerBoard = document.querySelector("#computerboard")
 
     drawPlayerBoard(player1, playerBoard)
-    drawComBoard(com, computerBoard)
+    drawComBoard(com, computerBoard, player1, playerBoard)
 
     
 }
@@ -46,13 +46,14 @@ function drawPlayerBoard(player, board) {
     });
 }
 
-function drawComBoard(com, board) {
+function drawComBoard(com, comBoard, player, playerBoard) {
+    console.log(player)
     com.gameBoard.board.forEach((row, x) => {
         row.forEach((cell, y) => {
             const gridSquare = document.createElement("div")
             gridSquare.classList.add("grid-square")
 
-            board.appendChild(gridSquare)
+            comBoard.appendChild(gridSquare)
 
             if (cell == 1) {
                 gridSquare.classList.add("hit-square")
@@ -64,10 +65,38 @@ function drawComBoard(com, board) {
                 gridSquare.classList.add("empty-square")
                 gridSquare.addEventListener("click", () => {
                     com.gameBoard.receiveAttack(x, y)
-                    board.innerHTML = ''
-                    drawComBoard(com, board)
+                    comBoard.innerHTML = ''
+                    drawComBoard(com, comBoard, player, playerBoard)
+                    computerTurn(player, playerBoard)
                 })
             }
         })
     });
+}
+ 
+
+
+
+function computerTurn(player, playerBoard) {
+    let x = getRandomInt(10)
+    let y = getRandomInt(10)
+    
+    while (1) {
+        if (player.gameBoard.board[x][y]==1 || player.gameBoard.board[x][y]==2) {
+            x = getRandomInt(10)
+            y = getRandomInt(10)
+        }
+        else {
+            break
+        }
+    }
+
+    player.gameBoard.receiveAttack(x,y)
+    playerBoard.innerHTML=''
+    drawPlayerBoard(player, playerBoard)
+
+}
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
 }
