@@ -15,25 +15,20 @@ export function populateBoard() {
     com.gameBoard.placeShip(7, 4, 3, 1)
     com.gameBoard.placeShip(0, 0, 1, 1)
 
-
-
-
     const playerBoard = document.querySelector("#playerboard")
     const computerBoard = document.querySelector("#computerboard")
 
-    drawPlayerBoard(player1, playerBoard)
-    drawComBoard(com, computerBoard)
-
+    drawBoard(player1, playerBoard, { revealShips:true })
+    drawBoard(com, computerBoard, { revealShips:false })
     
 }
 
-function drawPlayerBoard(player, board) {
-    player.gameBoard.board.forEach(column => {
-        column.forEach(cell => {
+function drawBoard(player, board, { revealShips }) {
+    player.gameBoard.board.forEach((column, x) => {
+        column.forEach((cell, y) => {
             const gridSquare = document.createElement("div")
-            gridSquare.classList.add("grid-square", "empty-square")
-            board.appendChild(gridSquare)
-            if (cell instanceof Ship) {
+            gridSquare.classList.add("grid-square")
+            if (cell instanceof Ship && revealShips) {
                 gridSquare.classList.add("player-ship")
             }
             else if (cell == 1) {
@@ -42,32 +37,28 @@ function drawPlayerBoard(player, board) {
             else if (cell == 2) {
                 gridSquare.classList.add("missed-square")
             }
+            else {
+                gridSquare.classList.add("empty-square")
+                if (!revealShips) {
+                    gridSquare.addEventListener("click", () => {
+                        player.gameBoard.receiveAttack(x, y);
+                        board.innerHTML = ''
+                        drawBoard(player, board, { revealShips });
+                    });
+                }
+            }
+            board.appendChild(gridSquare)
         })
     });
 }
 
-function drawComBoard(com, board) {
-    com.gameBoard.board.forEach((row, x) => {
-        row.forEach((cell, y) => {
-            const gridSquare = document.createElement("div")
-            gridSquare.classList.add("grid-square")
+function computerTurn() {
+    let x = getRandomInt(10)
+    let y = getRandomInt[10]
 
-            board.appendChild(gridSquare)
+    
+}
 
-            if (cell == 1) {
-                gridSquare.classList.add("hit-square")
-            }
-            else if (cell == 2) {
-                gridSquare.classList.add("missed-square")
-            }
-            else {
-                gridSquare.classList.add("empty-square")
-                gridSquare.addEventListener("click", () => {
-                    com.gameBoard.receiveAttack(x, y)
-                    board.innerHTML = ''
-                    drawComBoard(com, board)
-                })
-            }
-        })
-    });
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
 }
