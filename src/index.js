@@ -85,6 +85,7 @@ export class GameBoard {
         for (let i=0; i<length; i++) {
             if (this.board[x][y] == null) {
                 orientation ? y++ : x++
+                //check neighbors [x][y+1], [x+1][y], [x][y-1], [x-1][y]
             }
             else return false
         }
@@ -96,10 +97,51 @@ export class GameBoard {
         return false
     }
 
+    randomlyPlaceShips() {
+        let x
+        let y 
+        let orientation
+        let length
+
+        for (let i=0; i<10; i++) {
+            x = getRandomInt(10)
+            y = getRandomInt(10)
+            orientation = getRandomInt(2)
+            if (i==0) {
+                length = 4
+            }
+            else if (i<=2) {
+                length = 3
+            }
+            else if (i<=5) {
+                length = 2
+            }
+            else {
+                length = 1
+            }
+            if (!this.shipIsLegal(x, y, length, orientation)) {
+                i--
+            }
+            else {
+                this.placeShip(x, y, length, orientation)
+            }
+        }
+
+        //1 4long
+        //2 3long
+        //3 2long
+        //4 1long
+
+    }
+
 }
 
 export class Player {
     constructor() {
         this.gameBoard = new GameBoard
     }
+}
+
+export function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
 }

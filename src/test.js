@@ -99,5 +99,10 @@ describe("GameBoard class functionality", () => {
         expect(board.checkAllSunk()).toBe(true)
 
     })
+
+    test("random ship placement function", () => {
+        board.randomlyPlaceShips()
+        expect(board.ships.length).toBe(10)
+    })
 })
 

@@ -1,19 +1,12 @@
-import { Ship, GameBoard, Player } from "./index";
+import { Ship, GameBoard, Player, getRandomInt } from "./index";
 
 export function populateBoard() {
     const player1 = new Player
     const com = new Player
 
-    player1.gameBoard.placeShip(2, 2, 4, 0)
-    player1.gameBoard.placeShip(7, 4, 3, 1)
-    player1.gameBoard.placeShip(0, 0, 1, 1)
+    player1.gameBoard.randomlyPlaceShips()
 
-    player1.gameBoard.receiveAttack(3, 4)
-    player1.gameBoard.receiveAttack(3, 2)
-
-    com.gameBoard.placeShip(2, 2, 4, 0)
-    com.gameBoard.placeShip(7, 4, 3, 1)
-    com.gameBoard.placeShip(0, 0, 1, 1)
+    com.gameBoard.randomlyPlaceShips()
 
     const playerBoard = document.querySelector("#playerboard")
     const computerBoard = document.querySelector("#computerboard")
@@ -48,8 +41,8 @@ function drawPlayerBoard(player, board) {
 
 function drawComBoard(com, comBoard, player, playerBoard) {
     console.log(player)
-    com.gameBoard.board.forEach((row, x) => {
-        row.forEach((cell, y) => {
+    com.gameBoard.board.forEach((column, x) => {
+        column.forEach((cell, y) => {
             const gridSquare = document.createElement("div")
             gridSquare.classList.add("grid-square")
 
@@ -96,6 +89,3 @@ function computerTurn(player, playerBoard) {
 
 }
 
-function getRandomInt(max) {
-  return Math.floor(Math.random() * max);
-}
