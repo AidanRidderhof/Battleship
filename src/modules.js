@@ -17,7 +17,7 @@ export function populateBoard() {
     
 }
 
-function drawPlayerBoard(player, board) {
+export function drawPlayerBoard(player, board) {
     player.gameBoard.board.forEach((column, x) => {
         column.forEach((cell, y) => {
             const gridSquare = document.createElement("div")

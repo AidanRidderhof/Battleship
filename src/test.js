@@ -1,4 +1,3 @@
-import { experiments } from "webpack";
 import { Ship, GameBoard } from ".";
 
 describe("ship class functionality", ()=> {
