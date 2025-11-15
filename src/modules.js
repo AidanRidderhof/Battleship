@@ -1,4 +1,5 @@
 import { Ship, GameBoard, Player, getRandomInt } from "./index";
+import { updateShipCount, isOver } from "./interface";
 
 export function populateBoard() {
     const player1 = new Player
@@ -7,6 +8,8 @@ export function populateBoard() {
     player1.gameBoard.randomlyPlaceShips()
 
     com.gameBoard.randomlyPlaceShips()
+
+    updateShipCount(player1, com)
 
     const playerBoard = document.querySelector("#playerboard")
     const computerBoard = document.querySelector("#computerboard")
@@ -60,7 +63,10 @@ function drawComBoard(com, comBoard, player, playerBoard) {
                     com.gameBoard.receiveAttack(x, y)
                     comBoard.innerHTML = ''
                     drawComBoard(com, comBoard, player, playerBoard)
+                    isOver(player, com)
+
                     computerTurn(player, playerBoard)
+                    isOver(player, com)
                 })
             }
             comBoard.appendChild(gridSquare)
@@ -89,3 +95,9 @@ function computerTurn(player, playerBoard) {
 
 }
 
+function checkStatus(player) {
+    if(player.gameBoard.checkAllSunk()) {
+        return true
+    }
+    else return player.gameBoard.ships.length
+}
