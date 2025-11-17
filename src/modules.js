@@ -43,6 +43,7 @@ export function drawPlayerBoard(player, board) {
 }
 
 function drawComBoard(com, comBoard, player, playerBoard) {
+    let cellEvent
     console.log(player)
     com.gameBoard.board.forEach((column, x) => {
         column.forEach((cell, y) => {
@@ -59,7 +60,7 @@ function drawComBoard(com, comBoard, player, playerBoard) {
             }
             else {
                 gridSquare.classList.add("empty-square")
-                gridSquare.addEventListener("click", () => {
+                gridSquare.addEventListener("click", cellEvent = () => {
                     com.gameBoard.receiveAttack(x, y)
                     comBoard.innerHTML = ''
                     drawComBoard(com, comBoard, player, playerBoard)
