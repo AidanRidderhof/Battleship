@@ -45,3 +45,8 @@
 #computerboard .empty-square:hover {
     background-color: aqua;
 }
+
+#score {
+    display: flex;
+    justify-content: space-evenly;
+}
