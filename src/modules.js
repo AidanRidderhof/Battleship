@@ -63,10 +63,12 @@ function drawComBoard(com, comBoard, player, playerBoard) {
                     com.gameBoard.receiveAttack(x, y)
                     comBoard.innerHTML = ''
                     drawComBoard(com, comBoard, player, playerBoard)
+                    updateShipCount(player, com)
                     isOver(player, com)
 
                     computerTurn(player, playerBoard)
                     isOver(player, com)
+                    updateShipCount(player, com)
                 })
             }
             comBoard.appendChild(gridSquare)

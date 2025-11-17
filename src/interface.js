@@ -20,7 +20,7 @@ export function updateShipCount(player, com) {
     const compScore = document.getElementById("comp-score")
 
     playerScore.innerText=`Player Ships: ${p_remaining}`
-    compScore.innerText=`Player Ships: ${c_remaining}`
+    compScore.innerText=`Computer Ships: ${c_remaining}`
 
 }
 
